@@ -1,4 +1,4 @@
-import createElement from './createElement.js';
+import { createElement } from './utils.js';
 
 export function playerWins(name) {
 	const $loseTitle = createElement('div', 'loseTitle');
