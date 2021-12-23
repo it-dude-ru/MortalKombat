@@ -1,5 +1,5 @@
 import { $arenas } from './getElements.js';
-import createElement from './createElement.js';
+import { createElement } from './utils.js';
 
 export function createReloadButton() {
 	const $reloadWrap = createElement('div', 'reloadWrap');
