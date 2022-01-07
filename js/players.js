@@ -1,6 +1,6 @@
 import { HIT, ATTACK } from './consts.js';
 import { $formFight } from './getElements.js';
-import { getRandom } from './utils.js';
+import { getRandom, createElement } from './utils.js';
 
 class Player {
 	constructor(props) {
@@ -10,7 +10,7 @@ class Player {
 		this.img = props.img
 	}
 	elHP = () => document.querySelector(`.player${this.player} .life`);
-	changeHP = function(damage) {
+	changeHP = (damage) => {
 		if (this.hp < damage) {
 			this.hp = 0;
 		} else {
@@ -18,9 +18,31 @@ class Player {
 		}
 	}
 	renderHP = () => this.elHP().style.width = this.hp + '%';
+
+	renderPlayer = () => {
+		const $player = createElement('div', 'player' + this.player);
+		const $progressbar = createElement('div', 'progressbar');
+		const $character = createElement('div', 'character');
+		const $life = createElement('div', 'life');
+		$life.style.width = this.hp + '%';
+
+		const $name = createElement('div', 'name');
+		$name.innerText = this.name;
+
+		const $img = createElement('img');
+		$img.src = this.img;
+
+		$player.appendChild($progressbar);
+		$player.appendChild($character);
+		$progressbar.appendChild($life);
+		$progressbar.appendChild($name);
+		$character.appendChild($img);
+
+		return $player;
+	}
 }
 
-class Player1 extends Player {
+export class Player1 extends Player {
 	constructor(props) {
 		super(props);
 	}
@@ -29,7 +51,7 @@ class Player1 extends Player {
 
 		for (let item of $formFight) {
 			if (item.checked && item.name === 'hit') {
-				attack.value = getRandom(HIT[item.value]);
+				//attack.value = getRandom(HIT[item.value]);
 				attack.hit = item.value;
 			}
 
@@ -42,7 +64,7 @@ class Player1 extends Player {
 	}
 }
 
-class Player2 extends Player {
+export class Player2 extends Player {
 	constructor(props) {
 		super(props);
 	}
@@ -58,18 +80,3 @@ class Player2 extends Player {
 	}
 }
 
-
-export const player1 = new Player1 ({
-	player: 1,
- 	name: 'Sub-Zero',
- 	hp: 100,
- 	img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif'
-})
-
-
-export const player2 = new Player2 ({
-	player: 2,
-	name: 'Liu Kang',
-	hp: 100,
-	img: 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif'
-})

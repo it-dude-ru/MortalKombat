@@ -17,7 +17,7 @@ export default function generateLogs(type, player1, player2, damage = 0) {
 					replace('[playerKick]', player2.name).
 					replace('[playerDefence]', player1.name) +
 				' - ' + damage +
-				'[' + player1.hp + '/100]';
+				' [' + player1.hp + '/100]';
 			break;
 		case 'defence':
 			text = time() + ' - ' +
