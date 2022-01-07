@@ -1,10 +1,9 @@
-import { player1, player2 } from './players.js';
 import { $arenas, $randomButton } from './getElements.js';
 import { playerWins } from './playerWins.js';
 import generateLogs from "./generateLogs.js";
 import { createReloadButton } from './createReloadButton.js';
 
-export default function showResult() {
+export default function showResult(player1, player2) {
 	if (player1.hp === 0 || player2.hp === 0) {
 		$randomButton.disabled = true;
 		createReloadButton();

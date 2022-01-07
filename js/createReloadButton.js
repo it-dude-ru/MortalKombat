@@ -1,5 +1,5 @@
 import { $arenas } from './getElements.js';
-import createElement from './createElement.js';
+import { createElement } from './utils.js';
 
 export function createReloadButton() {
 	const $reloadWrap = createElement('div', 'reloadWrap');
@@ -7,7 +7,7 @@ export function createReloadButton() {
 	$button.innerText = 'Restart';
 
 	$reloadWrap.addEventListener('click', function () {
-		window.location.reload();
+		window.location.pathname = 'index.html';
 	});
 
 	$reloadWrap.appendChild($button);

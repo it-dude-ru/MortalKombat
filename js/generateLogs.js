@@ -1,8 +1,6 @@
 import { LOGS } from './consts.js';
 import { $chat } from './getElements.js';
-import { getRandom } from './getRandom.js';
-import time from "./time.js";
-
+import { getRandom, time } from './utils.js';
 
 export default function generateLogs(type, player1, player2, damage = 0) {
 	let text = '';
@@ -16,16 +14,16 @@ export default function generateLogs(type, player1, player2, damage = 0) {
 		case 'hit':
 			text = time() + ' - ' +
 				LOGS[type][getRandom(LOGS[type].length) - 1].
-					replace('[playerKick]', player1.name).
-					replace('[playerDefence]', player2.name) +
+					replace('[playerKick]', player2.name).
+					replace('[playerDefence]', player1.name) +
 				' - ' + damage +
-				'[' + player1.hp + '/100]';
+				' [' + player1.hp + '/100]';
 			break;
 		case 'defence':
 			text = time() + ' - ' +
 				LOGS[type][getRandom(LOGS[type].length) - 1].
-					replace('[playerKick]', player1.name).
-					replace('[playerDefence]', player2.name);
+					replace('[playerKick]', player2.name).
+					replace('[playerDefence]', player1.name);
 			break;
 		case 'end':
 			text = LOGS[type][getRandom(LOGS[type].length) - 1].
