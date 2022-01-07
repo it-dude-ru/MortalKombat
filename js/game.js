@@ -11,13 +11,15 @@ export default class Game {
 	getRandPlayer = async () =>
 		fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/choose').
 			then(res => res.json());
-	
+	fixHttp = (urlAddress) => urlAddress.replace('http', 'https');
 	start = async () => {
 		const p1 = JSON.parse(localStorage.getItem('player1'));;
 		let p2;
 		do {
 			p2 = await this.getRandPlayer();
 		} while (p1.name === p2.name);
+		p1.img = this.fixHttp(p1.img);
+		p2.img = this.fixHttp(p2.img);
 		player1 = new Player1({
 			...p1,
 			player: 1,
@@ -36,13 +38,12 @@ export default class Game {
 
 			const humanAttack = player1.attack();
 			const getAttack = async () =>
-				fetch('http://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
+				fetch('https://reactmarathon-api.herokuapp.com/api/mk/player/fight', {
 					method: 'POST',
 					body: JSON.stringify(humanAttack)
 				})
 				.then(res => res.json())
 				.then(attack => {
-				console.log(attack);
 				const human = attack.player1;
 				const robot = attack.player2;
 
